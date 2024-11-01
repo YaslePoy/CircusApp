@@ -1,0 +1,1137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище circus_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="serialNumber" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="wearAndTear" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentPerformance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="equipmentId" Type="int" Nullable="false" />
+          <Property Name="performanceId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "circus_db.dbo.Event" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="descriprion" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="hallId" />
+          </Key>
+          <Property Name="id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="descriprion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+          <Property Name="hallId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="rows" Type="int" Nullable="false" />
+          <Property Name="columns" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="column_name" Type="int" />
+          <Property Name="duration" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerformanceRepertoire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="repertoireId" Type="int" Nullable="false" />
+          <Property Name="performanceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Preparation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+          <Property Name="typeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreparationType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repertoire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="eventId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="row" Type="int" Nullable="false" />
+          <Property Name="column" Type="int" Nullable="false" />
+          <Property Name="eventId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="classId" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="cost" Type="money" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPerformance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="performanceId" Type="int" Nullable="false" />
+          <Property Name="rating" Type="decimal" Precision="2" Scale="1" />
+        </EntityType>
+        <EntityType Name="UserSkill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="skillId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSpecialization">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="specializationId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="EquipmentPerformance_Equipment_id_fk">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentPerformance" Type="Self.EquipmentPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EquipmentPerformance">
+              <PropertyRef Name="equipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipmentPerformance_Performance_id_fk">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="EquipmentPerformance" Type="Self.EquipmentPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EquipmentPerformance">
+              <PropertyRef Name="performanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Event_Hall_id_fk">
+          <End Role="Hall" Type="Self.Hall" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="hallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PerformanceRepertoire_Performance_id_fk">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="PerformanceRepertoire" Type="Self.PerformanceRepertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PerformanceRepertoire">
+              <PropertyRef Name="performanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PerformanceRepertoire_Repertoire_id_fk">
+          <End Role="Repertoire" Type="Self.Repertoire" Multiplicity="1" />
+          <End Role="PerformanceRepertoire" Type="Self.PerformanceRepertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repertoire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PerformanceRepertoire">
+              <PropertyRef Name="repertoireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Preparation_PreparationType_id_fk">
+          <End Role="PreparationType" Type="Self.PreparationType" Multiplicity="1" />
+          <End Role="Preparation" Type="Self.Preparation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreparationType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Preparation">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Preparation_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Preparation" Type="Self.Preparation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Preparation">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "Repertoire_Event_id_fk" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="Repertoire_Event_id_fk" />-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "Ticket_Event_id_fk" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="Ticket_Event_id_fk" />-->
+        <Association Name="Ticket_TicketClass_id_fk">
+          <End Role="TicketClass" Type="Self.TicketClass" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketClass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="classId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ticket_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role_id_fk">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPerformance_Performance_id_fk">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="UserPerformance" Type="Self.UserPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPerformance">
+              <PropertyRef Name="performanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPerformance_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPerformance" Type="Self.UserPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPerformance">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSkill_Skill_id_fk">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="UserSkill" Type="Self.UserSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSkill">
+              <PropertyRef Name="skillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSkill_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserSkill" Type="Self.UserSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSkill">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSpecialization_Specialization_id_fk">
+          <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
+          <End Role="UserSpecialization" Type="Self.UserSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSpecialization">
+              <PropertyRef Name="specializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSpecialization_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserSpecialization" Type="Self.UserSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSpecialization">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище circus_dbModelContainer">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentPerformance" EntityType="Self.EquipmentPerformance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hall" EntityType="Self.Hall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Performance" EntityType="Self.Performance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerformanceRepertoire" EntityType="Self.PerformanceRepertoire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preparation" EntityType="Self.Preparation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreparationType" EntityType="Self.PreparationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repertoire" EntityType="Self.Repertoire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketClass" EntityType="Self.TicketClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPerformance" EntityType="Self.UserPerformance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSkill" EntityType="Self.UserSkill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSpecialization" EntityType="Self.UserSpecialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Event].[id] AS [id], 
+    [Event].[name] AS [name], 
+    [Event].[descriprion] AS [descriprion], 
+    [Event].[address] AS [address], 
+    [Event].[timestamp] AS [timestamp], 
+    [Event].[hallId] AS [hallId]
+    FROM [dbo].[Event] AS [Event]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="EquipmentPerformance_Equipment_id_fk" Association="Self.EquipmentPerformance_Equipment_id_fk">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentPerformance" EntitySet="EquipmentPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentPerformance_Performance_id_fk" Association="Self.EquipmentPerformance_Performance_id_fk">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="EquipmentPerformance" EntitySet="EquipmentPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="Event_Hall_id_fk" Association="Self.Event_Hall_id_fk">
+            <End Role="Hall" EntitySet="Hall" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="PerformanceRepertoire_Performance_id_fk" Association="Self.PerformanceRepertoire_Performance_id_fk">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="PerformanceRepertoire" EntitySet="PerformanceRepertoire" />
+          </AssociationSet>
+          <AssociationSet Name="PerformanceRepertoire_Repertoire_id_fk" Association="Self.PerformanceRepertoire_Repertoire_id_fk">
+            <End Role="Repertoire" EntitySet="Repertoire" />
+            <End Role="PerformanceRepertoire" EntitySet="PerformanceRepertoire" />
+          </AssociationSet>
+          <AssociationSet Name="Preparation_PreparationType_id_fk" Association="Self.Preparation_PreparationType_id_fk">
+            <End Role="PreparationType" EntitySet="PreparationType" />
+            <End Role="Preparation" EntitySet="Preparation" />
+          </AssociationSet>
+          <AssociationSet Name="Preparation_User_id_fk" Association="Self.Preparation_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Preparation" EntitySet="Preparation" />
+          </AssociationSet>
+          <AssociationSet Name="Ticket_TicketClass_id_fk" Association="Self.Ticket_TicketClass_id_fk">
+            <End Role="TicketClass" EntitySet="TicketClass" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="Ticket_User_id_fk" Association="Self.Ticket_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="user_role_id_fk" Association="Self.user_role_id_fk">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="UserPerformance_Performance_id_fk" Association="Self.UserPerformance_Performance_id_fk">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="UserPerformance" EntitySet="UserPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="UserPerformance_User_id_fk" Association="Self.UserPerformance_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPerformance" EntitySet="UserPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="UserSkill_Skill_id_fk" Association="Self.UserSkill_Skill_id_fk">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="UserSkill" EntitySet="UserSkill" />
+          </AssociationSet>
+          <AssociationSet Name="UserSkill_User_id_fk" Association="Self.UserSkill_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSkill" EntitySet="UserSkill" />
+          </AssociationSet>
+          <AssociationSet Name="UserSpecialization_Specialization_id_fk" Association="Self.UserSpecialization_Specialization_id_fk">
+            <End Role="Specialization" EntitySet="Specialization" />
+            <End Role="UserSpecialization" EntitySet="UserSpecialization" />
+          </AssociationSet>
+          <AssociationSet Name="UserSpecialization_User_id_fk" Association="Self.UserSpecialization_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSpecialization" EntitySet="UserSpecialization" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="circus_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="serialNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="wearAndTear" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+          <NavigationProperty Name="EquipmentPerformance" Relationship="Self.EquipmentPerformance_Equipment_id_fk" FromRole="Equipment" ToRole="EquipmentPerformance" />
+        </EntityType>
+        <EntityType Name="EquipmentPerformance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="equipmentId" Type="Int32" Nullable="false" />
+          <Property Name="performanceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.EquipmentPerformance_Equipment_id_fk" FromRole="EquipmentPerformance" ToRole="Equipment" />
+          <NavigationProperty Name="Performance" Relationship="Self.EquipmentPerformance_Performance_id_fk" FromRole="EquipmentPerformance" ToRole="Performance" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rows" Type="Int32" Nullable="false" />
+          <Property Name="columns" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="Self.Event_Hall_id_fk" FromRole="Hall" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="column_name" Type="Int32" />
+          <Property Name="duration" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="EquipmentPerformance" Relationship="Self.EquipmentPerformance_Performance_id_fk" FromRole="Performance" ToRole="EquipmentPerformance" />
+          <NavigationProperty Name="PerformanceRepertoire" Relationship="Self.PerformanceRepertoire_Performance_id_fk" FromRole="Performance" ToRole="PerformanceRepertoire" />
+          <NavigationProperty Name="UserPerformance" Relationship="Self.UserPerformance_Performance_id_fk" FromRole="Performance" ToRole="UserPerformance" />
+        </EntityType>
+        <EntityType Name="PerformanceRepertoire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="repertoireId" Type="Int32" Nullable="false" />
+          <Property Name="performanceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Performance" Relationship="Self.PerformanceRepertoire_Performance_id_fk" FromRole="PerformanceRepertoire" ToRole="Performance" />
+          <NavigationProperty Name="Repertoire" Relationship="Self.PerformanceRepertoire_Repertoire_id_fk" FromRole="PerformanceRepertoire" ToRole="Repertoire" />
+        </EntityType>
+        <EntityType Name="Preparation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="typeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PreparationType" Relationship="Self.Preparation_PreparationType_id_fk" FromRole="Preparation" ToRole="PreparationType" />
+          <NavigationProperty Name="User" Relationship="Self.Preparation_User_id_fk" FromRole="Preparation" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PreparationType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Preparation" Relationship="Self.Preparation_PreparationType_id_fk" FromRole="PreparationType" ToRole="Preparation" />
+        </EntityType>
+        <EntityType Name="Repertoire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="eventId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PerformanceRepertoire" Relationship="Self.PerformanceRepertoire_Repertoire_id_fk" FromRole="Repertoire" ToRole="PerformanceRepertoire" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.user_role_id_fk" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserSkill" Relationship="Self.UserSkill_Skill_id_fk" FromRole="Skill" ToRole="UserSkill" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserSpecialization" Relationship="Self.UserSpecialization_Specialization_id_fk" FromRole="Specialization" ToRole="UserSpecialization" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="row" Type="Int32" Nullable="false" />
+          <Property Name="column" Type="Int32" Nullable="false" />
+          <Property Name="eventId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="classId" Type="Int32" />
+          <NavigationProperty Name="TicketClass" Relationship="Self.Ticket_TicketClass_id_fk" FromRole="Ticket" ToRole="TicketClass" />
+          <NavigationProperty Name="User" Relationship="Self.Ticket_User_id_fk" FromRole="Ticket" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TicketClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ticket" Relationship="Self.Ticket_TicketClass_id_fk" FromRole="TicketClass" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Preparation" Relationship="Self.Preparation_User_id_fk" FromRole="User" ToRole="Preparation" />
+          <NavigationProperty Name="Role" Relationship="Self.user_role_id_fk" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Ticket" Relationship="Self.Ticket_User_id_fk" FromRole="User" ToRole="Ticket" />
+          <NavigationProperty Name="UserPerformance" Relationship="Self.UserPerformance_User_id_fk" FromRole="User" ToRole="UserPerformance" />
+          <NavigationProperty Name="UserSkill" Relationship="Self.UserSkill_User_id_fk" FromRole="User" ToRole="UserSkill" />
+          <NavigationProperty Name="UserSpecialization" Relationship="Self.UserSpecialization_User_id_fk" FromRole="User" ToRole="UserSpecialization" />
+        </EntityType>
+        <EntityType Name="UserPerformance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="performanceId" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="Decimal" Precision="2" Scale="1" />
+          <NavigationProperty Name="Performance" Relationship="Self.UserPerformance_Performance_id_fk" FromRole="UserPerformance" ToRole="Performance" />
+          <NavigationProperty Name="User1" Relationship="Self.UserPerformance_User_id_fk" FromRole="UserPerformance" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserSkill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="skillId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Skill" Relationship="Self.UserSkill_Skill_id_fk" FromRole="UserSkill" ToRole="Skill" />
+          <NavigationProperty Name="User" Relationship="Self.UserSkill_User_id_fk" FromRole="UserSkill" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserSpecialization">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="specializationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Specialization" Relationship="Self.UserSpecialization_Specialization_id_fk" FromRole="UserSpecialization" ToRole="Specialization" />
+          <NavigationProperty Name="User" Relationship="Self.UserSpecialization_User_id_fk" FromRole="UserSpecialization" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="descriprion" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="timestamp" />
+            <PropertyRef Name="hallId" />
+          </Key>
+          <Property Name="id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descriprion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hallId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hall" Relationship="Self.Event_Hall_id_fk" FromRole="Event" ToRole="Hall" />
+        </EntityType>
+        <Association Name="EquipmentPerformance_Equipment_id_fk">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="EquipmentPerformance" Type="Self.EquipmentPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EquipmentPerformance">
+              <PropertyRef Name="equipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipmentPerformance_Performance_id_fk">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="EquipmentPerformance" Type="Self.EquipmentPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EquipmentPerformance">
+              <PropertyRef Name="performanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Event_Hall_id_fk">
+          <End Role="Hall" Type="Self.Hall" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="hallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PerformanceRepertoire_Performance_id_fk">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="PerformanceRepertoire" Type="Self.PerformanceRepertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PerformanceRepertoire">
+              <PropertyRef Name="performanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPerformance_Performance_id_fk">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="UserPerformance" Type="Self.UserPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPerformance">
+              <PropertyRef Name="performanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PerformanceRepertoire_Repertoire_id_fk">
+          <End Role="Repertoire" Type="Self.Repertoire" Multiplicity="1" />
+          <End Role="PerformanceRepertoire" Type="Self.PerformanceRepertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Repertoire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PerformanceRepertoire">
+              <PropertyRef Name="repertoireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Preparation_PreparationType_id_fk">
+          <End Role="PreparationType" Type="Self.PreparationType" Multiplicity="1" />
+          <End Role="Preparation" Type="Self.Preparation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreparationType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Preparation">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Preparation_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Preparation" Type="Self.Preparation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Preparation">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_role_id_fk">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSkill_Skill_id_fk">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="UserSkill" Type="Self.UserSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSkill">
+              <PropertyRef Name="skillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSpecialization_Specialization_id_fk">
+          <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
+          <End Role="UserSpecialization" Type="Self.UserSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSpecialization">
+              <PropertyRef Name="specializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ticket_TicketClass_id_fk">
+          <End Role="TicketClass" Type="Self.TicketClass" Multiplicity="0..1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketClass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="classId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ticket_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserPerformance_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPerformance" Type="Self.UserPerformance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPerformance">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSkill_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserSkill" Type="Self.UserSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSkill">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSpecialization_User_id_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserSpecialization" Type="Self.UserSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserSpecialization">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="circus_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentPerformance" EntityType="Self.EquipmentPerformance" />
+          <EntitySet Name="Hall" EntityType="Self.Hall" />
+          <EntitySet Name="Performance" EntityType="Self.Performance" />
+          <EntitySet Name="PerformanceRepertoire" EntityType="Self.PerformanceRepertoire" />
+          <EntitySet Name="Preparation" EntityType="Self.Preparation" />
+          <EntitySet Name="PreparationType" EntityType="Self.PreparationType" />
+          <EntitySet Name="Repertoire" EntityType="Self.Repertoire" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" />
+          <EntitySet Name="TicketClass" EntityType="Self.TicketClass" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserPerformance" EntityType="Self.UserPerformance" />
+          <EntitySet Name="UserSkill" EntityType="Self.UserSkill" />
+          <EntitySet Name="UserSpecialization" EntityType="Self.UserSpecialization" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <AssociationSet Name="EquipmentPerformance_Equipment_id_fk" Association="Self.EquipmentPerformance_Equipment_id_fk">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="EquipmentPerformance" EntitySet="EquipmentPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="EquipmentPerformance_Performance_id_fk" Association="Self.EquipmentPerformance_Performance_id_fk">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="EquipmentPerformance" EntitySet="EquipmentPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="Event_Hall_id_fk" Association="Self.Event_Hall_id_fk">
+            <End Role="Hall" EntitySet="Hall" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="PerformanceRepertoire_Performance_id_fk" Association="Self.PerformanceRepertoire_Performance_id_fk">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="PerformanceRepertoire" EntitySet="PerformanceRepertoire" />
+          </AssociationSet>
+          <AssociationSet Name="UserPerformance_Performance_id_fk" Association="Self.UserPerformance_Performance_id_fk">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="UserPerformance" EntitySet="UserPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="PerformanceRepertoire_Repertoire_id_fk" Association="Self.PerformanceRepertoire_Repertoire_id_fk">
+            <End Role="Repertoire" EntitySet="Repertoire" />
+            <End Role="PerformanceRepertoire" EntitySet="PerformanceRepertoire" />
+          </AssociationSet>
+          <AssociationSet Name="Preparation_PreparationType_id_fk" Association="Self.Preparation_PreparationType_id_fk">
+            <End Role="PreparationType" EntitySet="PreparationType" />
+            <End Role="Preparation" EntitySet="Preparation" />
+          </AssociationSet>
+          <AssociationSet Name="Preparation_User_id_fk" Association="Self.Preparation_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Preparation" EntitySet="Preparation" />
+          </AssociationSet>
+          <AssociationSet Name="user_role_id_fk" Association="Self.user_role_id_fk">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="UserSkill_Skill_id_fk" Association="Self.UserSkill_Skill_id_fk">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="UserSkill" EntitySet="UserSkill" />
+          </AssociationSet>
+          <AssociationSet Name="UserSpecialization_Specialization_id_fk" Association="Self.UserSpecialization_Specialization_id_fk">
+            <End Role="Specialization" EntitySet="Specialization" />
+            <End Role="UserSpecialization" EntitySet="UserSpecialization" />
+          </AssociationSet>
+          <AssociationSet Name="Ticket_TicketClass_id_fk" Association="Self.Ticket_TicketClass_id_fk">
+            <End Role="TicketClass" EntitySet="TicketClass" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="Ticket_User_id_fk" Association="Self.Ticket_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="UserPerformance_User_id_fk" Association="Self.UserPerformance_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPerformance" EntitySet="UserPerformance" />
+          </AssociationSet>
+          <AssociationSet Name="UserSkill_User_id_fk" Association="Self.UserSkill_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSkill" EntitySet="UserSkill" />
+          </AssociationSet>
+          <AssociationSet Name="UserSpecialization_User_id_fk" Association="Self.UserSpecialization_User_id_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSpecialization" EntitySet="UserSpecialization" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище circus_dbModelContainer" CdmEntityContainer="circus_dbEntities">
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="circus_dbModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="serialNumber" ColumnName="serialNumber" />
+                <ScalarProperty Name="wearAndTear" ColumnName="wearAndTear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentPerformance">
+            <EntityTypeMapping TypeName="circus_dbModel.EquipmentPerformance">
+              <MappingFragment StoreEntitySet="EquipmentPerformance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="equipmentId" ColumnName="equipmentId" />
+                <ScalarProperty Name="performanceId" ColumnName="performanceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hall">
+            <EntityTypeMapping TypeName="circus_dbModel.Hall">
+              <MappingFragment StoreEntitySet="Hall">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="rows" ColumnName="rows" />
+                <ScalarProperty Name="columns" ColumnName="columns" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Performance">
+            <EntityTypeMapping TypeName="circus_dbModel.Performance">
+              <MappingFragment StoreEntitySet="Performance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="column_name" ColumnName="column_name" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerformanceRepertoire">
+            <EntityTypeMapping TypeName="circus_dbModel.PerformanceRepertoire">
+              <MappingFragment StoreEntitySet="PerformanceRepertoire">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="repertoireId" ColumnName="repertoireId" />
+                <ScalarProperty Name="performanceId" ColumnName="performanceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Preparation">
+            <EntityTypeMapping TypeName="circus_dbModel.Preparation">
+              <MappingFragment StoreEntitySet="Preparation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreparationType">
+            <EntityTypeMapping TypeName="circus_dbModel.PreparationType">
+              <MappingFragment StoreEntitySet="PreparationType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repertoire">
+            <EntityTypeMapping TypeName="circus_dbModel.Repertoire">
+              <MappingFragment StoreEntitySet="Repertoire">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="circus_dbModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skill">
+            <EntityTypeMapping TypeName="circus_dbModel.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialization">
+            <EntityTypeMapping TypeName="circus_dbModel.Specialization">
+              <MappingFragment StoreEntitySet="Specialization">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket">
+            <EntityTypeMapping TypeName="circus_dbModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="column" ColumnName="column" />
+                <ScalarProperty Name="eventId" ColumnName="eventId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="classId" ColumnName="classId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketClass">
+            <EntityTypeMapping TypeName="circus_dbModel.TicketClass">
+              <MappingFragment StoreEntitySet="TicketClass">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="circus_dbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPerformance">
+            <EntityTypeMapping TypeName="circus_dbModel.UserPerformance">
+              <MappingFragment StoreEntitySet="UserPerformance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="performanceId" ColumnName="performanceId" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSkill">
+            <EntityTypeMapping TypeName="circus_dbModel.UserSkill">
+              <MappingFragment StoreEntitySet="UserSkill">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="skillId" ColumnName="skillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSpecialization">
+            <EntityTypeMapping TypeName="circus_dbModel.UserSpecialization">
+              <MappingFragment StoreEntitySet="UserSpecialization">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="specializationId" ColumnName="specializationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="circus_dbModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="descriprion" ColumnName="descriprion" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="hallId" ColumnName="hallId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
