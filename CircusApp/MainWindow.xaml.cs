@@ -1,4 +1,5 @@
 ﻿using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
 
 namespace CircusApp
 {
@@ -12,8 +13,7 @@ namespace CircusApp
             InitializeComponent();
             ApplicationThemeManager.Apply(this);
             ApplicationThemeManager.Apply(
-                ApplicationTheme.Dark                                      // Whether to change accents automatically
-            );
+                ApplicationTheme.Dark);
         }
     }
 }
