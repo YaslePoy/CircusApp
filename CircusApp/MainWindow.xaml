@@ -6,8 +6,8 @@
            xmlns:local="clr-namespace:CircusApp"
            xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
            mc:Ignorable="d"
-           Title="MainWindow" Height="450" Width="800">
+           Title="MainWindow" Height="700" Width="1000">
     <Grid>
-        <Frame Margin="5" Name="BaseFrame"></Frame>
+        <Frame Margin="5" Name="BaseFrame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

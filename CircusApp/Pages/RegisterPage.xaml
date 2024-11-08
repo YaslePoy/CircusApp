@@ -1,0 +1,31 @@
+﻿<Page x:Class="CircusApp.Pages.RegisterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CircusApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegisterPage">
+
+    <StackPanel Margin="10" Width="300" HorizontalAlignment="Left">
+        <TextBlock>Регистрация нового пользователя</TextBlock>
+        <TextBlock Margin="0, 5" Text="class"></TextBlock>
+        <TextBlock Margin="0, 5" Text="Логин"></TextBlock>
+        <TextBox Margin="0, 5" Name="loginTB"></TextBox>
+        <TextBlock Margin="0, 5" Text="Пароль"></TextBlock>
+        <TextBox Margin="0, 5" Name="passwordTB"></TextBox>
+        <TextBlock Margin="0, 5" Text="Фамилия"></TextBlock>
+        <TextBox Margin="0, 5" Name="surnameTB"></TextBox>
+        <TextBlock Margin="0, 5" Text="Имя"></TextBlock>
+        <TextBox Margin="0, 5" Name="nameTB"></TextBox>
+        <TextBlock Margin="0, 5" Text="Роль"></TextBlock>
+        <ComboBox Margin="0,5">
+            <ComboBoxItem>Админ</ComboBoxItem>
+            <ComboBoxItem>Артист</ComboBoxItem>
+            <ComboBoxItem>Менеджер</ComboBoxItem>
+            <ComboBoxItem>Кассир</ComboBoxItem>
+        </ComboBox>
+
+    </StackPanel>
+</Page>

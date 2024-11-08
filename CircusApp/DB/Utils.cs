@@ -9,7 +9,6 @@ namespace CircusApp.DB
 {
     public static class Utils
     {
-        public static circus_dbEntities DB = new circus_dbEntities();
         
     }
 }

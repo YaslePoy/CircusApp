@@ -12,9 +12,6 @@ namespace CircusApp
         public MainWindow()
         {
             InitializeComponent();
-            ApplicationThemeManager.Apply(this);
-            ApplicationThemeManager.Apply(
-                ApplicationTheme.Dark);
             BaseFrame.Navigate(new HelloPage());
         }
     }

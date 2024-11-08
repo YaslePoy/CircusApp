@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CircusApp.DB;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,7 @@ namespace CircusApp
     /// </summary>
     public partial class App : Application
     {
+        public static circus_dbEntities DB = new circus_dbEntities();
+        public static User User;
     }
 }

@@ -21,7 +21,7 @@ public partial class MainWindow : Window
             var objName = properties[0].Split(' ')[2].Replace("\r\n", "");
             var finalXaml = new StringBuilder();
             var insertCode = new StringBuilder($"public void {objName}InsertData({objName} data) \r\n{{\r\n");
-            var fetchCode = new StringBuilder($"public void {objName}FetchData({objName} data) \r\n{{\r\n");
+            var fetchCode = new StringBuilder($"public bool {objName}FetchData({objName} data) \r\n{{\r\n");
             foreach (var property in properties)
             {
                 var parts = property.Split(" ");
@@ -50,19 +50,19 @@ public partial class MainWindow : Window
                         break;
                     case "int":
                         fetchCode.AppendLine($$"""
-                                                   if (!int.TryParse({name}TB.Text, out data.{{name}}))
+                                                   if (!int.TryParse({{name}}TB.Text, out data.{{name}}))
                                                    {
                                                        MessageBox.Show("Проверьте правильность введенных данных.");
-                                                       return;
+                                                       return false;
                                                    }
                                                """);
                         break;
                     case "decimal":
                         fetchCode.AppendLine($$"""
-                                                   if (!decimal.TryParse({name}TB.Text, out data.{{name}}))
+                                                   if (!decimal.TryParse({{name}}TB.Text, out data.{{name}}))
                                                    {
                                                        MessageBox.Show("Проверьте правильность введенных данных.");
-                                                       return;
+                                                       return false;
                                                    }
                                                """);
                         break;
@@ -72,7 +72,7 @@ public partial class MainWindow : Window
             
             insertCode.AppendLine("}");
             insertCode.AppendLine();
-            fetchCode.AppendLine("}");
+            fetchCode.AppendLine("return true;\n}");
             insertCode.Append(fetchCode.ToString());
             XAMLTB.Text = finalXaml.ToString();
             IOTB.Text = insertCode.ToString();
