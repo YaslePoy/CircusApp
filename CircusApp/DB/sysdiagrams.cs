@@ -12,20 +12,12 @@ namespace CircusApp.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Equipment
+    public partial class sysdiagrams
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Equipment()
-        {
-            this.EquipmentPerformance = new HashSet<EquipmentPerformance>();
-        }
-    
-        public int id { get; set; }
         public string name { get; set; }
-        public string serialNumber { get; set; }
-        public decimal wearAndTear { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EquipmentPerformance> EquipmentPerformance { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

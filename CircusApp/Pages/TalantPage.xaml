@@ -1,0 +1,52 @@
+﻿<Page x:Class="CircusApp.Pages.TalantPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CircusApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TalantPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Margin="5">
+            <TextBlock Margin="5, 0" DockPanel.Dock="Top">Специализации</TextBlock>
+            <DockPanel VerticalAlignment="Top" DockPanel.Dock="Top">
+                <Button VerticalAlignment="Stretch" Click="AddSpec" DockPanel.Dock="Right">+</Button>
+                <TextBox Name="SpecNameTB" Margin="5, 0"/>
+            </DockPanel>
+            <ListBox x:Name="SpecsLB" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Bottom" Margin="5,5, 0, 0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <Button DockPanel.Dock="Right" Click="RemoveSpec">-</Button>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding}" DockPanel.Dock="Left"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Margin="5">
+            <TextBlock Margin="5, 0" DockPanel.Dock="Top">Навыки</TextBlock>
+
+            <DockPanel VerticalAlignment="Top" DockPanel.Dock="Top">
+                <Button VerticalAlignment="Stretch" Click="AddSkill" DockPanel.Dock="Right">+</Button>
+                <TextBox Name="SkillNameTB" Margin="5, 0"/>
+            </DockPanel>
+            <ListBox x:Name="SkillLB" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Bottom" Margin="5,5, 0, 0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <Button DockPanel.Dock="Right" Click="RemoveSkill">-</Button>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding}" DockPanel.Dock="Left"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+    </Grid>
+</Page>

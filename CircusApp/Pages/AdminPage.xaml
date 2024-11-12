@@ -18,6 +18,9 @@
             <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="UserRegister">
                 <TextBlock Margin="5">Персонал</TextBlock>
             </Border>
+            <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="UserRegisterTalant">
+                <TextBlock Margin="5">Навыки</TextBlock>
+            </Border>
             <Border Margin="5" BorderThickness="1" BorderBrush="Black">
                 <TextBlock Margin="5">Номера</TextBlock>
             </Border>

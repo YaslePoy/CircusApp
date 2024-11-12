@@ -29,5 +29,10 @@ namespace CircusApp.Pages
         {
             AdminNav.Navigate(new EmployeesPage());
         }
+
+        private void UserRegisterTalant(object sender, MouseButtonEventArgs e)
+        {
+            AdminNav.Navigate(new TalantPage());
+        }
     }
 }

@@ -36,6 +36,7 @@ namespace CircusApp.DB
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Skill> Skill { get; set; }
         public virtual DbSet<Specialization> Specialization { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TicketClass> TicketClass { get; set; }
         public virtual DbSet<User> User { get; set; }

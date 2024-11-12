@@ -14,7 +14,7 @@ namespace CircusApp.DB
     
     public partial class Event
     {
-        public Nullable<int> id { get; set; }
+        public int id { get; set; }
         public string name { get; set; }
         public string descriprion { get; set; }
         public string address { get; set; }
