@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CircusApp.DB;
 
 namespace CircusApp.Pages
 {
@@ -33,6 +34,11 @@ namespace CircusApp.Pages
         private void UserRegisterTalant(object sender, MouseButtonEventArgs e)
         {
             AdminNav.Navigate(new TalantPage());
+        }
+
+        private void ShowTicketPage(object sender, MouseButtonEventArgs e)
+        {
+            AdminNav.Navigate(new TicketPage(new Hall { columns = 100, rows = 5 }));
         }
     }
 }

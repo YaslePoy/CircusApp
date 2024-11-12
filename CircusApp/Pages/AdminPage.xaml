@@ -21,8 +21,8 @@
             <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="UserRegisterTalant">
                 <TextBlock Margin="5">Навыки</TextBlock>
             </Border>
-            <Border Margin="5" BorderThickness="1" BorderBrush="Black">
-                <TextBlock Margin="5">Номера</TextBlock>
+            <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="ShowTicketPage">
+                <TextBlock Margin="5">Билеты</TextBlock>
             </Border>
         </StackPanel>
         <Frame Grid.Column="1" x:Name="AdminNav" NavigationUIVisibility="Hidden"></Frame>
