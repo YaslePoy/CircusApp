@@ -34,6 +34,11 @@ namespace CircusApp.Pages
                 {
                     var distance = (SeatRate + 3) * j + minDistance;
                     var seat = new Ellipse { Height = SeatRate, Width = SeatRate, Fill = new SolidColorBrush(Colors.Gray) };
+                    seat.MouseEnter += (s, e) =>
+                    {
+                        (s as Ellipse).Fill = new SolidColorBrush(Colors.Red);
+                    };
+                    seat.MouseLeave += (s, e) => (s as Ellipse).Fill = new SolidColorBrush(Colors.Gray);
                     Canvas.SetLeft(seat, cos * distance + globalPlus);
                     Canvas.SetTop(seat, sin * distance + globalPlus);
                     SeatsCanvas.Children.Add(seat);
