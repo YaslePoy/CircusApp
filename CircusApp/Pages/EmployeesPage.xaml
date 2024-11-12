@@ -8,7 +8,22 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EmployeesPage">
 
-    <Grid>
-        
-    </Grid>
+    <DockPanel Margin="5">
+        <Button DockPanel.Dock="Bottom" Margin="5" Click="Button_Click">Добавить</Button>
+        <DataGrid DockPanel.Dock="Top" Margin="5" Name="EmpDG" AutoGenerateColumns="False" MouseDoubleClick="EmpDG_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Табельный номер" Binding="{Binding id}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding surname}" Width="150"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="150"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding Role.name}" Width="100"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Удалить" Click="Button_Click_1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
 </Page>

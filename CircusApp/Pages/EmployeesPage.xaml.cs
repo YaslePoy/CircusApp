@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CircusApp.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,35 @@ namespace CircusApp.Pages
         public EmployeesPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            EmpDG.ItemsSource = App.DB.User.ToList();
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RegisterPage(null));
+        }
+
+        private void EmpDG_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new RegisterPage(EmpDG.SelectedValue as User));
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var user = (sender as Button).DataContext as User;
+            if (user == null)
+                return;
+            App.DB.User.Remove(user);
+            App.DB.SaveChanges();
+            EmpDG.ItemsSource = null;
+            EmpDG.ItemsSource = App.DB.User.ToList();
         }
     }
 }

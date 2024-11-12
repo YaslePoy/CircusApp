@@ -10,7 +10,6 @@
 
     <StackPanel Margin="10" Width="300" HorizontalAlignment="Left">
         <TextBlock>Регистрация нового пользователя</TextBlock>
-        <TextBlock Margin="0, 5" Text="class"></TextBlock>
         <TextBlock Margin="0, 5" Text="Логин"></TextBlock>
         <TextBox Margin="0, 5" Name="loginTB"></TextBox>
         <TextBlock Margin="0, 5" Text="Пароль"></TextBlock>
@@ -20,12 +19,13 @@
         <TextBlock Margin="0, 5" Text="Имя"></TextBlock>
         <TextBox Margin="0, 5" Name="nameTB"></TextBox>
         <TextBlock Margin="0, 5" Text="Роль"></TextBlock>
-        <ComboBox Margin="0,5">
+        <ComboBox Name="roleCB" Margin="0,5">
             <ComboBoxItem>Админ</ComboBoxItem>
             <ComboBoxItem>Артист</ComboBoxItem>
             <ComboBoxItem>Менеджер</ComboBoxItem>
             <ComboBoxItem>Кассир</ComboBoxItem>
         </ComboBox>
 
+        <Button Click="Button_Click" Margin="0, 5">Сохранить</Button>
     </StackPanel>
 </Page>

@@ -27,7 +27,7 @@ namespace CircusApp.Pages
 
         private void UserRegister(object sender, MouseButtonEventArgs e)
         {
-            AdminNav.Navigate(new RegisterPage());
+            AdminNav.Navigate(new EmployeesPage());
         }
     }
 }

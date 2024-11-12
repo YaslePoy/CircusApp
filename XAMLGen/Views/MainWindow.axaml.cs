@@ -18,7 +18,7 @@ public partial class MainWindow : Window
         {
             var rawText = InputCodeTB.Text;
             var properties = rawText.Split("public", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            var objName = properties[0].Split(' ')[2].Replace("\r\n", "");
+            var objName = properties[0].Split(' ')[3].Replace("\r\n", "").Trim('{');
             var finalXaml = new StringBuilder();
             var insertCode = new StringBuilder($"public void {objName}InsertData({objName} data) \r\n{{\r\n");
             var fetchCode = new StringBuilder($"public bool {objName}FetchData({objName} data) \r\n{{\r\n");

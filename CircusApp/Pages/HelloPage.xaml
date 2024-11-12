@@ -8,9 +8,9 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock HorizontalAlignment="Center" Margin="5">Вход в систему</TextBlock>
         <TextBlock Margin="5">Логин</TextBlock>
-        <TextBox x:Name="LoginTB" Width="250"  Margin="5"></TextBox>
+        <TextBox x:Name="LoginTB" Width="250"  Margin="5">a</TextBox>
         <TextBlock Margin="5">Пароль</TextBlock>
-        <PasswordBox Margin="5" x:Name="PassPB"></PasswordBox>
-        <Button Click="Button_Click" Margin="5" HorizontalAlignment="Stretch">Войти</Button>
+        <PasswordBox Margin="5" x:Name="PassPB" Password="a"></PasswordBox>
+        <Button IsDefault="True" Click="Button_Click" Margin="5" HorizontalAlignment="Stretch">Войти</Button>
     </StackPanel>
 </Page>
