@@ -27,6 +27,7 @@ namespace CircusApp.DB
     
         public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<EquipmentPerformance> EquipmentPerformance { get; set; }
+        public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Hall> Hall { get; set; }
         public virtual DbSet<Performance> Performance { get; set; }
         public virtual DbSet<PerformanceRepertoire> PerformanceRepertoire { get; set; }
@@ -43,6 +44,5 @@ namespace CircusApp.DB
         public virtual DbSet<UserPerformance> UserPerformance { get; set; }
         public virtual DbSet<UserSkill> UserSkill { get; set; }
         public virtual DbSet<UserSpecialization> UserSpecialization { get; set; }
-        public virtual DbSet<Event> Event { get; set; }
     }
 }

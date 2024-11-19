@@ -1,6 +1,4 @@
-﻿using CircusApp.DB;
-using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,6 +20,7 @@ namespace CircusApp.Pages
                 MessageBox.Show("Не может быть такого логина");
                 return;
             }
+
             if (string.IsNullOrWhiteSpace(p))
             {
                 MessageBox.Show("Не может быть такого пароля");
@@ -29,10 +28,7 @@ namespace CircusApp.Pages
             }
 
             var user = App.DB.User.FirstOrDefault(i => i.login == l && i.password == p);
-            if (user is null)
-            {
-                MessageBox.Show("Проверьте правильность введенного логина и пароля");
-            }
+            if (user is null) MessageBox.Show("Проверьте правильность введенного логина и пароля");
 
             App.User = user;
 
@@ -42,7 +38,7 @@ namespace CircusApp.Pages
                     NavigationService.Navigate(new AdminPage());
                     break;
                 case 2:
-                    NavigationService.Navigate(new ArtistPage());
+                    NavigationService.Navigate(new ArtistHelloPage());
                     break;
                 case 3:
                     NavigationService.Navigate(new ManagerPage());

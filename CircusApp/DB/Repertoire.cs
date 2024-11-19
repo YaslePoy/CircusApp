@@ -25,6 +25,7 @@ namespace CircusApp.DB
         public string description { get; set; }
         public int eventId { get; set; }
     
+        public virtual Event Event { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PerformanceRepertoire> PerformanceRepertoire { get; set; }
     }

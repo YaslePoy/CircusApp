@@ -14,6 +14,13 @@ namespace CircusApp.DB
     
     public partial class Event
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Event()
+        {
+            this.Repertoire = new HashSet<Repertoire>();
+            this.Ticket = new HashSet<Ticket>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string descriprion { get; set; }
@@ -22,5 +29,9 @@ namespace CircusApp.DB
         public int hallId { get; set; }
     
         public virtual Hall Hall { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Repertoire> Repertoire { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ticket> Ticket { get; set; }
     }
 }

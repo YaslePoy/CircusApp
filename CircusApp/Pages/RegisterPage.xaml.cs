@@ -1,27 +1,16 @@
-﻿using CircusApp.DB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CircusApp.DB;
 
 namespace CircusApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для RegisterPage.xaml
+    ///     Логика взаимодействия для RegisterPage.xaml
     /// </summary>
     public partial class RegisterPage : Page
     {
         private User _user;
+
         public RegisterPage(User user)
         {
             InitializeComponent();
@@ -29,18 +18,17 @@ namespace CircusApp.Pages
 
             _user = user;
             if (_user != null) UserInsertData(_user);
-            else UserInsertData(new User() { role_id = 1 });
+            else UserInsertData(new User { role_id = 1 });
         }
 
 
         public void UserInsertData(User data)
         {
-            loginTB.Text = (data.login ?? "").ToString();
-            passwordTB.Text = (data.password ?? "").ToString();
-            surnameTB.Text = (data.surname ?? "").ToString();
-            nameTB.Text = (data.name ?? "").ToString();
+            loginTB.Text = (data.login ?? "");
+            passwordTB.Text = (data.password ?? "");
+            surnameTB.Text = (data.surname ?? "");
+            nameTB.Text = (data.name ?? "");
             roleCB.SelectedIndex = data.role_id - 1;
-
         }
 
         public bool UserFetchData(User data)
@@ -72,9 +60,7 @@ namespace CircusApp.Pages
             {
                 App.DB.SaveChanges();
                 NavigationService.Navigate(new EmployeesPage());
-
             }
-
         }
     }
 }

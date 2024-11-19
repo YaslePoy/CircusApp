@@ -22,16 +22,9 @@
           <Property Name="equipmentId" Type="int" Nullable="false" />
           <Property Name="performanceId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "circus_db.dbo.Event" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="descriprion" />
-            <PropertyRef Name="address" />
-            <PropertyRef Name="timestamp" />
-            <PropertyRef Name="hallId" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -262,12 +255,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6035: В связи "Repertoire_Event_id_fk" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
-        <Association Name="Repertoire_Event_id_fk" />-->
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6035: В связи "Ticket_Event_id_fk" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
-        <Association Name="Ticket_Event_id_fk" />-->
+        <Association Name="Repertoire_Event_id_fk">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Repertoire" Type="Self.Repertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Repertoire">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ticket_Event_id_fk">
+          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Ticket_TicketClass_id_fk">
           <End Role="TicketClass" Type="Self.TicketClass" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -379,6 +390,7 @@
         <EntityContainer Name="Хранилище circus_dbModelContainer">
           <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquipmentPerformance" EntityType="Self.EquipmentPerformance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hall" EntityType="Self.Hall" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Performance" EntityType="Self.Performance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PerformanceRepertoire" EntityType="Self.PerformanceRepertoire" Schema="dbo" store:Type="Tables" />
@@ -395,16 +407,6 @@
           <EntitySet Name="UserPerformance" EntityType="Self.UserPerformance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSkill" EntityType="Self.UserSkill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSpecialization" EntityType="Self.UserSpecialization" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Event" EntityType="Self.Event" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Event].[id] AS [id], 
-    [Event].[name] AS [name], 
-    [Event].[descriprion] AS [descriprion], 
-    [Event].[address] AS [address], 
-    [Event].[timestamp] AS [timestamp], 
-    [Event].[hallId] AS [hallId]
-    FROM [dbo].[Event] AS [Event]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="EquipmentPerformance_Equipment_id_fk" Association="Self.EquipmentPerformance_Equipment_id_fk">
             <End Role="Equipment" EntitySet="Equipment" />
             <End Role="EquipmentPerformance" EntitySet="EquipmentPerformance" />
@@ -432,6 +434,14 @@
           <AssociationSet Name="Preparation_User_id_fk" Association="Self.Preparation_User_id_fk">
             <End Role="User" EntitySet="User" />
             <End Role="Preparation" EntitySet="Preparation" />
+          </AssociationSet>
+          <AssociationSet Name="Repertoire_Event_id_fk" Association="Self.Repertoire_Event_id_fk">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Repertoire" EntitySet="Repertoire" />
+          </AssociationSet>
+          <AssociationSet Name="Ticket_Event_id_fk" Association="Self.Ticket_Event_id_fk">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
           <AssociationSet Name="Ticket_TicketClass_id_fk" Association="Self.Ticket_TicketClass_id_fk">
             <End Role="TicketClass" EntitySet="TicketClass" />
@@ -477,6 +487,7 @@
         <EntityContainer Name="circus_dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Equipment" EntityType="circus_dbModel.Equipment" />
           <EntitySet Name="EquipmentPerformance" EntityType="circus_dbModel.EquipmentPerformance" />
+          <EntitySet Name="Event" EntityType="circus_dbModel.Event" />
           <EntitySet Name="Hall" EntityType="circus_dbModel.Hall" />
           <EntitySet Name="Performance" EntityType="circus_dbModel.Performance" />
           <EntitySet Name="PerformanceRepertoire" EntityType="circus_dbModel.PerformanceRepertoire" />
@@ -493,7 +504,6 @@
           <EntitySet Name="UserPerformance" EntityType="circus_dbModel.UserPerformance" />
           <EntitySet Name="UserSkill" EntityType="circus_dbModel.UserSkill" />
           <EntitySet Name="UserSpecialization" EntityType="circus_dbModel.UserSpecialization" />
-          <EntitySet Name="Event" EntityType="circus_dbModel.Event" />
           <AssociationSet Name="EquipmentPerformance_Equipment_id_fk" Association="circus_dbModel.EquipmentPerformance_Equipment_id_fk">
             <End Role="Equipment" EntitySet="Equipment" />
             <End Role="EquipmentPerformance" EntitySet="EquipmentPerformance" />
@@ -505,6 +515,14 @@
           <AssociationSet Name="Event_Hall_id_fk" Association="circus_dbModel.Event_Hall_id_fk">
             <End Role="Hall" EntitySet="Hall" />
             <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="Repertoire_Event_id_fk" Association="circus_dbModel.Repertoire_Event_id_fk">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Repertoire" EntitySet="Repertoire" />
+          </AssociationSet>
+          <AssociationSet Name="Ticket_Event_id_fk" Association="circus_dbModel.Ticket_Event_id_fk">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
           <AssociationSet Name="PerformanceRepertoire_Performance_id_fk" Association="circus_dbModel.PerformanceRepertoire_Performance_id_fk">
             <End Role="Performance" EntitySet="Performance" />
@@ -579,6 +597,20 @@
           <NavigationProperty Name="Equipment" Relationship="circus_dbModel.EquipmentPerformance_Equipment_id_fk" FromRole="EquipmentPerformance" ToRole="Equipment" />
           <NavigationProperty Name="Performance" Relationship="circus_dbModel.EquipmentPerformance_Performance_id_fk" FromRole="EquipmentPerformance" ToRole="Performance" />
         </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="descriprion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hallId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hall" Relationship="circus_dbModel.Event_Hall_id_fk" FromRole="Event" ToRole="Hall" />
+          <NavigationProperty Name="Repertoire" Relationship="circus_dbModel.Repertoire_Event_id_fk" FromRole="Event" ToRole="Repertoire" />
+          <NavigationProperty Name="Ticket" Relationship="circus_dbModel.Ticket_Event_id_fk" FromRole="Event" ToRole="Ticket" />
+        </EntityType>
         <EntityType Name="Hall">
           <Key>
             <PropertyRef Name="id" />
@@ -639,6 +671,7 @@
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="eventId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="circus_dbModel.Repertoire_Event_id_fk" FromRole="Repertoire" ToRole="Event" />
           <NavigationProperty Name="PerformanceRepertoire" Relationship="circus_dbModel.PerformanceRepertoire_Repertoire_id_fk" FromRole="Repertoire" ToRole="PerformanceRepertoire" />
         </EntityType>
         <EntityType Name="Role">
@@ -685,6 +718,7 @@
           <Property Name="eventId" Type="Int32" Nullable="false" />
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="classId" Type="Int32" />
+          <NavigationProperty Name="Event" Relationship="circus_dbModel.Ticket_Event_id_fk" FromRole="Ticket" ToRole="Event" />
           <NavigationProperty Name="TicketClass" Relationship="circus_dbModel.Ticket_TicketClass_id_fk" FromRole="Ticket" ToRole="TicketClass" />
           <NavigationProperty Name="User" Relationship="circus_dbModel.Ticket_User_id_fk" FromRole="Ticket" ToRole="User" />
         </EntityType>
@@ -745,23 +779,6 @@
           <NavigationProperty Name="Specialization" Relationship="circus_dbModel.UserSpecialization_Specialization_id_fk" FromRole="UserSpecialization" ToRole="Specialization" />
           <NavigationProperty Name="User" Relationship="circus_dbModel.UserSpecialization_User_id_fk" FromRole="UserSpecialization" ToRole="User" />
         </EntityType>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="descriprion" />
-            <PropertyRef Name="address" />
-            <PropertyRef Name="timestamp" />
-            <PropertyRef Name="hallId" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="descriprion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="hallId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Hall" Relationship="circus_dbModel.Event_Hall_id_fk" FromRole="Event" ToRole="Hall" />
-        </EntityType>
         <Association Name="EquipmentPerformance_Equipment_id_fk">
           <End Type="circus_dbModel.Equipment" Role="Equipment" Multiplicity="1" />
           <End Type="circus_dbModel.EquipmentPerformance" Role="EquipmentPerformance" Multiplicity="*" />
@@ -795,6 +812,30 @@
             </Principal>
             <Dependent Role="Event">
               <PropertyRef Name="hallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Repertoire_Event_id_fk">
+          <End Type="circus_dbModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="circus_dbModel.Repertoire" Role="Repertoire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Repertoire">
+              <PropertyRef Name="eventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ticket_Event_id_fk">
+          <End Type="circus_dbModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="circus_dbModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="eventId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -954,7 +995,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -975,6 +1016,18 @@
               <MappingFragment StoreEntitySet="EquipmentPerformance">
                 <ScalarProperty Name="performanceId" ColumnName="performanceId" />
                 <ScalarProperty Name="equipmentId" ColumnName="equipmentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="circus_dbModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="hallId" ColumnName="hallId" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="descriprion" ColumnName="descriprion" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1129,18 +1182,6 @@
               <MappingFragment StoreEntitySet="UserSpecialization">
                 <ScalarProperty Name="specializationId" ColumnName="specializationId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Event">
-            <EntityTypeMapping TypeName="circus_dbModel.Event">
-              <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="hallId" ColumnName="hallId" />
-                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="descriprion" ColumnName="descriprion" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

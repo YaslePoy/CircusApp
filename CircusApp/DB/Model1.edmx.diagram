@@ -5,28 +5,30 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e649d3d103b044dfad8e01c8cffc2e62" Name="Diagram1">
-        <EntityTypeShape EntityType="circus_dbModel.Equipment" Width="1.5" PointX="6" PointY="19.5" />
-        <EntityTypeShape EntityType="circus_dbModel.EquipmentPerformance" Width="1.5" PointX="8.25" PointY="14.5" />
-        <EntityTypeShape EntityType="circus_dbModel.Hall" Width="1.5" PointX="8.75" PointY="1.125" />
-        <EntityTypeShape EntityType="circus_dbModel.Performance" Width="1.5" PointX="3" PointY="11.125" />
-        <EntityTypeShape EntityType="circus_dbModel.PerformanceRepertoire" Width="1.5" PointX="8.25" PointY="11.5" />
-        <EntityTypeShape EntityType="circus_dbModel.Preparation" Width="1.5" PointX="5.25" PointY="10.375" />
-        <EntityTypeShape EntityType="circus_dbModel.PreparationType" Width="1.5" PointX="3" PointY="14.625" />
-        <EntityTypeShape EntityType="circus_dbModel.Repertoire" Width="1.5" PointX="6" PointY="16.5" />
-        <EntityTypeShape EntityType="circus_dbModel.Role" Width="1.5" PointX="0.75" PointY="7.625" />
-        <EntityTypeShape EntityType="circus_dbModel.Skill" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="circus_dbModel.Specialization" Width="1.5" PointX="6" PointY="1.625" />
-        <EntityTypeShape EntityType="circus_dbModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="circus_dbModel.Ticket" Width="1.5" PointX="8.25" PointY="7.125" />
-        <EntityTypeShape EntityType="circus_dbModel.TicketClass" Width="1.5" PointX="6" PointY="13.5" />
-        <EntityTypeShape EntityType="circus_dbModel.User" Width="1.5" PointX="3" PointY="6.75" />
-        <EntityTypeShape EntityType="circus_dbModel.UserPerformance" Width="1.5" PointX="5.25" PointY="7.375" />
-        <EntityTypeShape EntityType="circus_dbModel.UserSkill" Width="1.5" PointX="5.25" PointY="4.5" />
-        <EntityTypeShape EntityType="circus_dbModel.UserSpecialization" Width="1.5" PointX="8.25" PointY="4.5" />
-        <EntityTypeShape EntityType="circus_dbModel.Event" Width="1.5" PointX="11" PointY="1" />
+        <EntityTypeShape EntityType="circus_dbModel.Equipment" Width="1.5" PointX="6" PointY="21.5" />
+        <EntityTypeShape EntityType="circus_dbModel.EquipmentPerformance" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="circus_dbModel.Event" Width="1.5" PointX="6" PointY="15.125" />
+        <EntityTypeShape EntityType="circus_dbModel.Hall" Width="1.5" PointX="3.75" PointY="15.5" />
+        <EntityTypeShape EntityType="circus_dbModel.Performance" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="circus_dbModel.PerformanceRepertoire" Width="1.5" PointX="10.5" PointY="9.625" />
+        <EntityTypeShape EntityType="circus_dbModel.Preparation" Width="1.5" PointX="5.25" PointY="10.625" />
+        <EntityTypeShape EntityType="circus_dbModel.PreparationType" Width="1.5" PointX="3" PointY="19" />
+        <EntityTypeShape EntityType="circus_dbModel.Repertoire" Width="1.5" PointX="8.25" PointY="15.375" />
+        <EntityTypeShape EntityType="circus_dbModel.Role" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="circus_dbModel.Skill" Width="1.5" PointX="6" PointY="2" />
+        <EntityTypeShape EntityType="circus_dbModel.Specialization" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="circus_dbModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="0.875" />
+        <EntityTypeShape EntityType="circus_dbModel.Ticket" Width="1.5" PointX="8.25" PointY="7.375" />
+        <EntityTypeShape EntityType="circus_dbModel.TicketClass" Width="1.5" PointX="6" PointY="18.625" />
+        <EntityTypeShape EntityType="circus_dbModel.User" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="circus_dbModel.UserPerformance" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="circus_dbModel.UserSkill" Width="1.5" PointX="8.25" PointY="3.75" />
+        <EntityTypeShape EntityType="circus_dbModel.UserSpecialization" Width="1.5" PointX="5.25" PointY="7.75" />
         <AssociationConnector Association="circus_dbModel.EquipmentPerformance_Equipment_id_fk" />
         <AssociationConnector Association="circus_dbModel.EquipmentPerformance_Performance_id_fk" />
         <AssociationConnector Association="circus_dbModel.Event_Hall_id_fk" />
+        <AssociationConnector Association="circus_dbModel.Repertoire_Event_id_fk" />
+        <AssociationConnector Association="circus_dbModel.Ticket_Event_id_fk" />
         <AssociationConnector Association="circus_dbModel.PerformanceRepertoire_Performance_id_fk" />
         <AssociationConnector Association="circus_dbModel.UserPerformance_Performance_id_fk" />
         <AssociationConnector Association="circus_dbModel.PerformanceRepertoire_Repertoire_id_fk" />

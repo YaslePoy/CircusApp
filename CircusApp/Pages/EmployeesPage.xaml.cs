@@ -1,23 +1,14 @@
-﻿using CircusApp.DB;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CircusApp.DB;
 
 namespace CircusApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для EmployeesPage.xaml
+    ///     Логика взаимодействия для EmployeesPage.xaml
     /// </summary>
     public partial class EmployeesPage : Page
     {
@@ -30,7 +21,6 @@ namespace CircusApp.Pages
         {
             base.OnInitialized(e);
             EmpDG.ItemsSource = App.DB.User.ToList();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -40,8 +30,10 @@ namespace CircusApp.Pages
 
         private void EmpDG_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new RegisterPage(EmpDG.SelectedValue as User));
-
+            if (EmpDG.SelectedValue is User u && u.role_id == 2)
+                NavigationService.Navigate(new ArtistPage(u));
+            else
+                NavigationService.Navigate(new RegisterPage(EmpDG.SelectedValue as User));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

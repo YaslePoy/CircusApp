@@ -21,6 +21,7 @@ namespace CircusApp.DB
         public int userId { get; set; }
         public Nullable<int> classId { get; set; }
     
+        public virtual Event Event { get; set; }
         public virtual TicketClass TicketClass { get; set; }
         public virtual User User { get; set; }
     }

@@ -1,25 +1,25 @@
 ﻿<Page x:Class="CircusApp.Pages.EmployeesPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CircusApp.Pages"
-      mc:Ignorable="d" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EmployeesPage">
 
     <DockPanel Margin="5">
         <Button DockPanel.Dock="Bottom" Margin="5" Click="Button_Click">Добавить</Button>
-        <DataGrid DockPanel.Dock="Top" Margin="5" Name="EmpDG" AutoGenerateColumns="False" MouseDoubleClick="EmpDG_MouseDoubleClick">
+        <DataGrid DockPanel.Dock="Top" Margin="5" Name="EmpDG" AutoGenerateColumns="False"
+                  MouseDoubleClick="EmpDG_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Табельный номер" Binding="{Binding id}"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding surname}" Width="150"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="150"/>
-                <DataGridTextColumn Header="Роль" Binding="{Binding Role.name}" Width="100"/>
+                <DataGridTextColumn Header="Табельный номер" Binding="{Binding id}" />
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding surname}" Width="150" />
+                <DataGridTextColumn Header="Имя" Binding="{Binding name}" Width="150" />
+                <DataGridTextColumn Header="Роль" Binding="{Binding Role.name}" Width="100" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Удалить" Click="Button_Click_1"/>
+                            <Button Content="Удалить" Click="Button_Click_1" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CircusApp.DB;
 
 namespace CircusApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TalantPage.xaml
+    ///     Логика взаимодействия для TalantPage.xaml
     /// </summary>
     public partial class TalantPage : Page
     {
@@ -39,9 +28,9 @@ namespace CircusApp.Pages
 
         private void AddSpec(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(SpecNameTB.Text))
+            if (string.IsNullOrWhiteSpace(SpecNameTB.Text))
                 return;
-            App.DB.Specialization.Add(new Specialization() { name = SpecNameTB.Text });
+            App.DB.Specialization.Add(new Specialization { name = SpecNameTB.Text });
             App.DB.SaveChanges();
             SpecsLB.Items.Clear();
             App.DB.Specialization.ToList().ForEach(i => SpecsLB.Items.Add(i.name));
@@ -60,7 +49,7 @@ namespace CircusApp.Pages
         {
             if (string.IsNullOrWhiteSpace(SkillNameTB.Text))
                 return;
-            App.DB.Skill.Add(new Skill() { name = SkillNameTB.Text });
+            App.DB.Skill.Add(new Skill { name = SkillNameTB.Text });
             App.DB.SaveChanges();
             SkillLB.Items.Clear();
             App.DB.Skill.ToList().ForEach(i => SkillLB.Items.Add(i.name));

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Text;
 using Avalonia.Controls;
 
@@ -17,7 +16,8 @@ public partial class MainWindow : Window
         try
         {
             var rawText = InputCodeTB.Text;
-            var properties = rawText.Split("public", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var properties = rawText.Split("public",
+                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             var objName = properties[0].Split(' ')[3].Replace("\r\n", "").Trim('{');
             var finalXaml = new StringBuilder();
             var insertCode = new StringBuilder($"public void {objName}InsertData({objName} data) \r\n{{\r\n");
@@ -37,7 +37,8 @@ public partial class MainWindow : Window
                         insertCode.AppendLine($"\t{name}TB.Text = data.{name}.ToString();");
                         break;
                     case "System.DateTime":
-                        finalXaml.AppendLine($"<DatePicker  HorizontalAlignment=\"Left\" Margin=\"5\" Width=\"200\" Name=\"{name}DP\"></DatePicker>\n");
+                        finalXaml.AppendLine(
+                            $"<DatePicker  HorizontalAlignment=\"Left\" Margin=\"5\" Width=\"200\" Name=\"{name}DP\"></DatePicker>\n");
                         insertCode.AppendLine($"\t{name}TB.SelectedDate = data.{name};");
                         fetchCode.AppendLine($"\tdata.{name} = {name}TB.SelectedDate;");
                         break;
@@ -67,9 +68,8 @@ public partial class MainWindow : Window
                                                """);
                         break;
                 }
-
             }
-            
+
             insertCode.AppendLine("}");
             insertCode.AppendLine();
             fetchCode.AppendLine("return true;\n}");
@@ -81,6 +81,5 @@ public partial class MainWindow : Window
         {
             Console.WriteLine(exception);
         }
-        
     }
 }
