@@ -23,7 +23,13 @@
                 <TextBlock Margin="5">Билеты</TextBlock>
             </Border>
             <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="EventCreatePage">
-                <TextBlock Margin="5">События</TextBlock>
+                <TextBlock Margin="5">Шоу</TextBlock>
+            </Border>
+            <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="RepertPage">
+                <TextBlock Margin="5">Репертуары</TextBlock>
+            </Border>
+            <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="PerformancesPage">
+                <TextBlock Margin="5">Выступления</TextBlock>
             </Border>
             <Border Margin="5" BorderThickness="1" BorderBrush="Black" PreviewMouseDown="StatsPage">
                 <TextBlock Margin="5">Статистика</TextBlock>

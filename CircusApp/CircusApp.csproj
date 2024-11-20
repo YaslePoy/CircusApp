@@ -236,7 +236,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Performance\AllPerformancePage.xaml" />
+    <Page Include="Pages\Performance\AllRepert.xaml" />
     <Page Include="Pages\Performance\PerformancePage.xaml" />
+    <Page Include="Pages\Performance\RepertPage.xaml" />
     <Page Include="Pages\PreTicketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -283,8 +285,14 @@
     <Compile Include="Pages\Performance\AllPerformancePage.xaml.cs">
       <DependentUpon>AllPerformancePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Performance\AllRepert.xaml.cs">
+      <DependentUpon>AllRepert.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Performance\PerformancePage.xaml.cs">
       <DependentUpon>PerformancePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Performance\RepertPage.xaml.cs">
+      <DependentUpon>RepertPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PreTicketPage.xaml.cs">
       <DependentUpon>PreTicketPage.xaml</DependentUpon>

@@ -25,7 +25,6 @@ namespace CircusApp.DB
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public Nullable<int> column_name { get; set; }
         public System.TimeSpan duration { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

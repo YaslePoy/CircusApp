@@ -7,32 +7,36 @@ using CircusApp.DB;
 
 namespace CircusApp.Pages.Performance
 {
-    public partial class PerformancePage : Page
+    public partial class RepertPage : Page
     {
-        private List<User> _free, _owned;
+        private List<DB.Performance> _free, _owned;
 
-        private DB.Performance _performance;
-        public PerformancePage(DB.Performance performance)
+        private Repertoire _performance;
+        public RepertPage(Repertoire performance)
         {
             InitializeComponent();
             _performance = performance;
-            if(_performance != null) 
-                _owned = performance.UserPerformance.Select(i => i.User1).ToList();
+            var events = App.DB.Event.ToList();
+            if(_performance != null)
+                _owned = performance.PerformanceRepertoire.Select(i => i.Performance).ToList();
             else
-                _owned = new List<User>();
+                _owned = new List<DB.Performance>();
+            var curEvent = App.DB.Event.FirstOrDefault(i => i.id == _performance.eventId);
+            durCb.ItemsSource = events;
+            if(curEvent != null)
+                durCb.SelectedIndex = events.IndexOf(curEvent);
             CurrSpecLB.ItemsSource = _owned;
-            var allSpecs = App.DB.User.Where(i => i.role_id == 2).ToList();
+            var allSpecs = App.DB.Performance.ToList();
             _free = allSpecs.ToList().Where(i => !_owned.Any(x => x.id == i.id)).ToList();
             FreeSpecs.ItemsSource = _free;
             if (_performance.id == 0)
             {
                 UsersGrid.Visibility = Visibility.Hidden;
-            }
+            }           
             else
             {
                 nameTb.Text = _performance.name;
                 descTb.Text = _performance.description;
-                durTb.Text = _performance.duration.ToString();
             }
         }
 
@@ -41,14 +45,14 @@ namespace CircusApp.Pages.Performance
         {
             if (FreeSpecs.SelectedValue is null)
                 return;
-            var upSpec = FreeSpecs.SelectedValue as User;
+            var upSpec = FreeSpecs.SelectedValue as DB.Performance;
             _free.Remove(_free.FirstOrDefault(i => i.id == upSpec.id));
             _owned.Add(upSpec);
             CurrSpecLB.ItemsSource = null;
             FreeSpecs.ItemsSource = null;
             CurrSpecLB.ItemsSource = _owned;
             FreeSpecs.ItemsSource = _free;
-            App.DB.UserPerformance.Add(new UserPerformance { user = upSpec.id, performanceId = _performance.id });
+            App.DB.PerformanceRepertoire.Add(new PerformanceRepertoire { performanceId = upSpec.id, repertoireId = _performance.id });
             App.DB.SaveChanges();        
         }
 
@@ -56,14 +60,14 @@ namespace CircusApp.Pages.Performance
         {
             if (CurrSpecLB.SelectedValue is null)
                 return;
-            var upSpec = CurrSpecLB.SelectedValue as User;
+            var upSpec = CurrSpecLB.SelectedValue as DB.Performance;
             _owned.Remove(_owned.FirstOrDefault(i => i.id == upSpec.id));
             _free.Add(upSpec);
             CurrSpecLB.ItemsSource = null;
             FreeSpecs.ItemsSource = null;
             CurrSpecLB.ItemsSource = _owned;
             FreeSpecs.ItemsSource = _free;
-            App.DB.UserPerformance.Remove(App.DB.UserPerformance.FirstOrDefault(i => i.user == upSpec.id && i.performanceId == _performance.id));
+            App.DB.PerformanceRepertoire.Remove(App.DB.PerformanceRepertoire.FirstOrDefault(i => i.performanceId == upSpec.id && i.repertoireId == _performance.id));
             App.DB.SaveChanges();        
         }
 
@@ -73,19 +77,16 @@ namespace CircusApp.Pages.Performance
                 return;
             if(string.IsNullOrWhiteSpace(descTb.Text))
                 return;
-            if(string.IsNullOrWhiteSpace(durTb.Text))
-                return;
-            
-            if(!int.TryParse(durTb.Text, out int dur))
+            if(durCb.SelectedValue is null)
                 return;
 
             if (_performance.id == 0)
             {
-                _performance = new DB.Performance();
+                _performance = new Repertoire();
                 _performance.name = nameTb.Text;
                 _performance.description = descTb.Text;
-                _performance.duration = TimeSpan.FromMinutes(dur);
-                App.DB.Performance.Add(_performance);
+                _performance.eventId = (durCb.SelectedValue as DB.Event).id;
+                App.DB.Repertoire.Add(_performance);
                 App.DB.SaveChanges();
                 UsersGrid.Visibility = Visibility.Visible;
             }
@@ -93,9 +94,10 @@ namespace CircusApp.Pages.Performance
             {
                 _performance.name = nameTb.Text;
                 _performance.description = descTb.Text;
-                _performance.duration = TimeSpan.FromMinutes(dur);
+                _performance.eventId = (durCb.SelectedValue as DB.Event).id;
                 App.DB.SaveChanges();
             }
         }
+
     }
 }

@@ -6,15 +6,31 @@
       xmlns:local="clr-namespace:CircusApp.Pages"
       mc:Ignorable="d"
       Title="StatisticsPage" Height="450" Width="800">
-    <Grid>
-        <DataGrid Name="StatsDG" Margin="5" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Название события"></DataGridTextColumn>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Date}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Процент заполняемости" Binding="{Binding Fill}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Количество проданных мест" Binding="{Binding Sold}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Выручка" Binding="{Binding Sum}"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+    <TabControl>
+        <TabItem Header="По событиям">
+            <Grid>
+                <DataGrid Name="StatsDG" Margin="5" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Название события"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding Date}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Процент заполняемости" Binding="{Binding Fill}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Количество проданных мест" Binding="{Binding Sold}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Выручка" Binding="{Binding Sum}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="По артистам">
+            <Grid>
+                <DataGrid Name="ArtStatsDG" Margin="5" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding surname}" Header="Фамилия"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding name}" Header="Имя"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Процент заполняемости" Binding="{Binding Fill}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+    
 </Page>

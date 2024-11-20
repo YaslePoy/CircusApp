@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using CircusApp.DB;
+using CircusApp.Pages.Performance;
 
 namespace CircusApp.Pages
 {
@@ -37,6 +38,17 @@ namespace CircusApp.Pages
         private void StatsPage(object sender, MouseButtonEventArgs e)
         {
             AdminNav.Navigate(new StatisticsPage());
+        }
+
+        private void PerformancesPage(object sender, MouseButtonEventArgs e)
+        {
+            AdminNav.Navigate(new AllPerformancePage());
+        }
+
+        private void RepertPage(object sender, MouseButtonEventArgs e)
+        {
+            AdminNav.Navigate(new AllRepert());
+            
         }
     }
 }

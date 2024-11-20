@@ -49,7 +49,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="column_name" Type="int" />
           <Property Name="duration" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="PerformanceRepertoire">
@@ -628,7 +627,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="column_name" Type="Int32" />
           <Property Name="duration" Type="Time" Nullable="false" Precision="7" />
           <NavigationProperty Name="EquipmentPerformance" Relationship="circus_dbModel.EquipmentPerformance_Performance_id_fk" FromRole="Performance" ToRole="EquipmentPerformance" />
           <NavigationProperty Name="PerformanceRepertoire" Relationship="circus_dbModel.PerformanceRepertoire_Performance_id_fk" FromRole="Performance" ToRole="PerformanceRepertoire" />
@@ -1046,7 +1044,6 @@
             <EntityTypeMapping TypeName="circus_dbModel.Performance">
               <MappingFragment StoreEntitySet="Performance">
                 <ScalarProperty Name="duration" ColumnName="duration" />
-                <ScalarProperty Name="column_name" ColumnName="column_name" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
